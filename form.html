@@ -11,6 +11,35 @@
 </head>
 
 <body>
+    <table>
+        <tbody>
+            <tr>
+                <td>Wiersz 1</td>
+            </tr>
+            <tr>
+                <td>Wiersz 2</td>
+            </tr>
+            <tr>
+                <td>Wiersz 3</td>
+            </tr>
+            <tr>
+                <td>Wiersz 4</td>
+            </tr>
+            <tr>
+                <td>Wiersz 5</td>
+            </tr>
+            <tr>
+                <td>Wiersz 6</td>
+            </tr>
+            <tr>
+                <td>Wiersz 7</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <button type="button" onclick="swapRows(this)">Zamień</button>
+
     <form name="dane_osobowe">
         <table>
             <tr>
@@ -25,15 +54,17 @@
             <tr>
                 <td>Płeć</td>
                 <td>
-                    <input name="f_plec" value="f_k" checked type="radio" onclick="showElement('NazwiskoPanienskie')"/>kobieta<br />
-                    <input name="f_plec" value="f_m" type="radio" onclick="hideElement('NazwiskoPanienskie')"/>mężczyzna
+                    <input name="f_plec" value="f_k" checked type="radio"
+                        onclick="showElement('NazwiskoPanienskie')" />kobieta<br />
+                    <input name="f_plec" value="f_m" type="radio"
+                        onclick="hideElement('NazwiskoPanienskie')" />mężczyzna
                 </td>
             </tr>
             <tr>
-                
+
                 <td>N. panieńskie</td>
                 <td><span id="NazwiskoPanienskie"><input type="text" name="f_nazwisko_p"></span></td>
-                
+
             </tr>
             <tr>
                 <td>E-mail</td>
@@ -41,7 +72,8 @@
             </tr>
             <tr>
                 <td>Kod pocztowy</td>
-                <td><input type="text" name="f_kod" onkeyup="checkZipCodeRegEx(form.elements['f_kod'].value)"><span id="kod" /></td>
+                <td><input type="text" name="f_kod" onkeyup="checkZipCodeRegEx(form.elements['f_kod'].value)"><span
+                        id="kod" /></td>
             </tr>
             <tr>
                 <td>Ulica/Osiedle</td>
@@ -53,9 +85,16 @@
             </tr>
             <tr>
                 <td>Uwagi</td>
-                <td><textarea rows="5" cols="15" name="uwagi"></textarea>
+                <td>
+                    <textarea rows="5" cols="15" name="uwagi"
+                        onkeyup="cnt(this.form.uwagi, document.getElementById('zostalo'), 150)">
+                   </textarea>
                 </td>
             </tr>
+            <tr>
+                <td>Pozostało <span id="zostalo">150</span> znaków</td>
+            </tr>
+
             <tr>
                 <td colspan="2"><input type="submit" value="Prześlij" onclick="return validate(this.form)"></td>
             </tr>
