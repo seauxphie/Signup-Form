@@ -50,11 +50,73 @@ function checkEmail(str) {
     }
 }
 
+function checkStringAndFocus(obj, msg) {
+
+    var str = obj.value;
+    var errorFieldName = "e_" + obj.name.substr(2, obj.name.length);
+    if (isWhiteSpace(str) || isEmpty(str)) {
+        document.getElementById(errorFieldName).innerHTML = msg;
+        obj.focus();
+        startTimer(errorFieldName);
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+function checkEmailRegEx(str) {
+    var email = /[a-zA-Z_0-9\.]+@[a-zA-Z_0-9\.]+\.[a-zA-Z][a-zA-Z]+/;
+    if (email.test(str))
+        return true;
+    else {
+        alert("Podaj właściwy e-mail");
+        return false;
+    }
+}
+
+function checkZipCodeRegEx(str) {
+    var zipCode=/[0-9][0-9]-[0-9][0-9][0-9]/
+    if (zipCode.test(str)) {
+        document.getElementById("kod").innerHTML="OK";
+        document.getElementById("kod").className="green";
+        return true;
+    }
+    else {
+        document.getElementById("kod").innerHTML="Źle";
+        document.getElementById("kod").className="red";
+        return false;
+
+    }
+    
+}
+
+
+var errorField = "";
+function startTimer(fName) {
+    errorField = fName;
+    window.setTimeout("clearError(errorField)", 5000);
+}
+function clearError(objName) {
+    document.getElementById(objName).innerHTML = "";
+}
+
+function showElement(e) {
+    document.getElementById(e).style.visibility = 'visible';
+}
+function hideElement(e) {
+    document.getElementById(e).style.visibility = 'hidden';
+}
+
+
+
 function validate(form) {
-    return checkString(form.elements["f_imie"].value, "Podaj imię!")
+    
+    return checkStringAndFocus(form.elements["f_imie"], "Podaj imię!")
         && checkString(form.elements["f_nazwisko"].value, "Podaj nazwisko!")
-        && checkString(form.elements["f_kod"].value, "Podaj kod pocztowy!")
+        && checkEmailRegEx(form.elements["f_email"].value)
+        && checkZipCodeRegEx(form.elements["f_kod"].value)
         && checkString(form.elements["f_ulica"].value, "Podaj ulicę!")
         && checkString(form.elements["f_miasto"].value, "Podaj miasto!")
-        && checkEmail(form.elements["f_email"].value)
-    }
+        
+}

@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="cache-control" content="no-cache">
     <title>JavaScript</title>
 
     <script src="form_check.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" title="CSS file">
 </head>
 
 <body>
@@ -14,21 +16,24 @@
             <tr>
                 <td>Imię</td>
                 <td><input type="text" name="f_imie"></td>
+                <td><span class="err" id="e_imie" /></td>
             </tr>
             <tr>
                 <td>Nazwisko</td>
-                <td><input type="text" name="f_nazwisko"></td>
+                <td><input type="text" name="f_nazwisko"><span class="err" id="e_nazwisko"></span></td>
             </tr>
             <tr>
                 <td>Płeć</td>
                 <td>
-                    <input name="f_plec" value="f_k" checked type="radio" />kobieta<br />
-                    <input name="f_plec" value="f_m" type="radio" />mężczyzna
+                    <input name="f_plec" value="f_k" checked type="radio" onclick="showElement('NazwiskoPanienskie')"/>kobieta<br />
+                    <input name="f_plec" value="f_m" type="radio" onclick="hideElement('NazwiskoPanienskie')"/>mężczyzna
                 </td>
             </tr>
             <tr>
+                
                 <td>N. panieńskie</td>
-                <td><input type="text" name="f_nazwisko_p"></td>
+                <td><span id="NazwiskoPanienskie"><input type="text" name="f_nazwisko_p"></span></td>
+                
             </tr>
             <tr>
                 <td>E-mail</td>
@@ -36,7 +41,7 @@
             </tr>
             <tr>
                 <td>Kod pocztowy</td>
-                <td><input type="text" name="f_kod"></td>
+                <td><input type="text" name="f_kod" onkeyup="checkZipCodeRegEx(form.elements['f_kod'].value)"><span id="kod" /></td>
             </tr>
             <tr>
                 <td>Ulica/Osiedle</td>
