@@ -15,3 +15,8 @@ span.err {
     font-weight: bold;
     padding-left: 5px;
 }
+
+.wrong {
+    border-color:red;
+    border-style: dashed;
+}

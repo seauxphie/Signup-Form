@@ -76,19 +76,19 @@ function checkEmailRegEx(str) {
 }
 
 function checkZipCodeRegEx(str) {
-    var zipCode=/[0-9][0-9]-[0-9][0-9][0-9]/
+    var zipCode = /[0-9][0-9]-[0-9][0-9][0-9]/
     if (zipCode.test(str)) {
-        document.getElementById("kod").innerHTML="OK";
-        document.getElementById("kod").className="green";
+        document.getElementById("kod").innerHTML = "OK";
+        document.getElementById("kod").className = "green";
         return true;
     }
     else {
-        document.getElementById("kod").innerHTML="Źle";
-        document.getElementById("kod").className="red";
+        document.getElementById("kod").innerHTML = "Źle";
+        document.getElementById("kod").className = "red";
         return false;
 
     }
-    
+
 }
 
 
@@ -111,12 +111,33 @@ function hideElement(e) {
 
 
 function validate(form) {
-    
-    return checkStringAndFocus(form.elements["f_imie"], "Podaj imię!")
-        && checkString(form.elements["f_nazwisko"].value, "Podaj nazwisko!")
-        && checkEmailRegEx(form.elements["f_email"].value)
-        && checkZipCodeRegEx(form.elements["f_kod"].value)
-        && checkString(form.elements["f_ulica"].value, "Podaj ulicę!")
-        && checkString(form.elements["f_miasto"].value, "Podaj miasto!")
-        
+    var elems = new Array(form.length);
+    elems.fill(true);
+    elems[0] = checkStringAndFocus(form.elements["f_imie"], "Podaj imię!");
+    elems[1] = checkString(form.elements["f_nazwisko"].value, "Podaj nazwisko!");
+    elems[5] = checkEmailRegEx(form.elements["f_email"].value);
+    elems[6] = checkZipCodeRegEx(form.elements["f_kod"].value);
+    elems[7] = checkString(form.elements["f_ulica"].value, "Podaj ulicę!");
+    elems[8] = checkString(form.elements["f_miasto"].value, "Podaj miasto!");
+    var validated = elems[0] && elems[1] && elems[5] && elems[6] && elems[7] && elems[8];
+    if (!validated) {
+        for (var i = 0; i < form.length; i++) {
+            if (!elems[i]) form.elements.item(i).className = "wrong";
+        }
+    }
+
+    return validated;
+}
+
+function alterRows(i, e) {
+    if (e) {
+        if (i % 2 == 1) {
+            e.setAttribute("style", "background-color: Aqua;");
+        }
+        e = e.nextSibling;
+        while (e && e.nodeType != 1) {
+            e = e.nextSibling;
+        }
+        alterRows(++i, e);
+    }
 }
