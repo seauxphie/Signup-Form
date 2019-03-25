@@ -130,7 +130,9 @@ function validate(form) {
 }
 
 function alterRows(i, e) {
+    
     if (e) {
+        
         if (i % 2 == 1) {
             e.setAttribute("style", "background-color: Aqua;");
         }
@@ -142,7 +144,7 @@ function alterRows(i, e) {
     }
 }
 
-alterRows(1, document.getElementsByTagName("tr")[0])
+//alterRows(1, document.getElementsByTagName("tr")[0]);
 
 
 function nextNode(e) {
